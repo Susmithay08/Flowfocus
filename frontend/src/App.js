@@ -110,6 +110,9 @@ function App() {
   const handleLogout = () => {
     setToken(null);
     setUser(null);
+    setEmail('');        // ADD
+    setPassword('');     // ADD
+    setName('');         // ADD
     localStorage.removeItem('token');
     delete axios.defaults.headers.common['Authorization'];
   };
@@ -239,12 +242,34 @@ function App() {
         <div className="auth-card">
           <h1 className="auth-title">Flow<span className="accent">•</span>Focus</h1>
           <p className="auth-subtitle">AI-Powered Pomodoro Timer</p>
-          <form onSubmit={handleAuth} className="auth-form">
+          <form onSubmit={handleAuth} className="auth-form" autoComplete="off">
             {authMode === 'register' && (
-              <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} required />
+              <input
+                type="text"
+                placeholder="Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                autoComplete="off"
+                required
+              />
             )}
-            <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-            <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required minLength={8} />
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              autoComplete="off"
+              required
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              autoComplete="new-password"
+              required
+              minLength={8}
+            />
             <button type="submit" className="auth-button">{authMode === 'login' ? 'Sign In' : 'Create Account'}</button>
           </form>
           <p className="auth-switch">
