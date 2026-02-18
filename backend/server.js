@@ -13,8 +13,10 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: '*',
-  credentials: false
+  origin: function (origin, callback) {
+    callback(null, true);
+  },
+  credentials: true
 }));
 
 app.use(express.json());
